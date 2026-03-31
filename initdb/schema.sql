@@ -1,20 +1,24 @@
 -- ================================
 -- 테이블 DDL
 -- ================================
+USE practice_db;
+
+SET NAMES 'utf8mb4';
+
 
 CREATE TABLE students (
     id INT PRIMARY KEY,
     name VARCHAR(50),
     grade INT,        -- 학년 (1~3)
-    class VARCHAR(10) -- 반 (A, B, C)
-);
+    class_name VARCHAR(10) -- 반 (A, B, C)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE subjects (
     id INT PRIMARY KEY,
     name VARCHAR(50),
     teacher VARCHAR(50),
     credit INT  -- 학점
-);
+) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE scores (
     id INT PRIMARY KEY,
@@ -24,7 +28,7 @@ CREATE TABLE scores (
     exam_date DATE,
     FOREIGN KEY (student_id) REFERENCES students(id),
     FOREIGN KEY (subject_id) REFERENCES subjects(id)
-);
+) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE attendance (
     id INT PRIMARY KEY,
@@ -32,13 +36,13 @@ CREATE TABLE attendance (
     attend_date DATE,
     status VARCHAR(10), -- 'present', 'absent', 'late'
     FOREIGN KEY (student_id) REFERENCES students(id)
-);
+) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ================================
 -- 데이터
 -- ================================
 
-INSERT INTO students VALUES
+INSERT INTO students (id, name, grade, class_name) VALUES
 (1,  '김민준', 1, 'A'),
 (2,  '이서연', 1, 'A'),
 (3,  '박지호', 1, 'B'),

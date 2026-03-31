@@ -18,9 +18,10 @@ services:
     depends_on:
       - db
     environment:
-      - DB_URL=jdbc:mysql://db:3306/${DB_NAME}
+      - DB_URL=jdbc:mysql://db:3306/${DB_NAME}?characterEncoding=UTF-8
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
+    restart: on-failure:5
   frontend:
     build: ./frontend
     container_name: frontend
