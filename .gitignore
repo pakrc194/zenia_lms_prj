@@ -1,2 +1,4 @@
 .env
 .idea
+application-local.yml
+mysql_data/
