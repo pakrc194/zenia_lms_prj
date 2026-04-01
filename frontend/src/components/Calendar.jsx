@@ -7,6 +7,8 @@ export default function Calendar({setAttendances}) {
     const [dayArr, setDayArr] = useState(["일","월","화","수","목","금","토"])
     const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString("en-CA"))
 
+    const [attendMark, setAttendMarks] = useState([])
+
     useEffect(()=>{
         const fetchAttendance = async () => {
             const {data} = await api.get("/attendance/list",{
@@ -46,6 +48,16 @@ export default function Calendar({setAttendances}) {
             }
         }
 
+        const fetchAttendMark = async () => {
+            const {data} = await api.get("/attendance/month", {
+                params:{
+                    date:new Date(today.getFullYear(), today.getMonth(), 1).toLocaleDateString("en-CA")
+                }
+            })
+            console.log(data)
+            setAttendMarks(data)
+        }
+        fetchAttendMark()
         //console.log(dayArr)
     },[today])
 
@@ -66,6 +78,7 @@ export default function Calendar({setAttendances}) {
                                 }
                             }>
                                 {v!=0 && v}
+                                {attendMark.find(m=>m.day===v) && `👨‍🎓${attendMark.find(m=>m.day===v)?.count}`}
                             </div>
                 })}
             </div>

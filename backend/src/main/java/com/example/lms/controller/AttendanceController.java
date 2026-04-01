@@ -1,5 +1,6 @@
 package com.example.lms.controller;
 
+import com.example.lms.dto.AttendByMonthDto;
 import com.example.lms.entity.Attendance;
 import com.example.lms.service.AttendanceService;
 import jakarta.annotation.Resource;
@@ -21,5 +22,10 @@ public class AttendanceController {
     @GetMapping("/list")
     List<Attendance> findAllAttendance(@RequestParam String date) {
         return attendanceService.findByDate(date);
+    }
+
+    @GetMapping("/month")
+    List<AttendByMonthDto> findAttendanceByMonth(@RequestParam String date) {
+        return attendanceService.findAttendanceByMonth(date);
     }
 }
