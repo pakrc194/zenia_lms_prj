@@ -10,9 +10,35 @@ services:
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d
       - ./mysql_data:/var/lib/mysql 
+
+  # backend:
+  #   build: ./backend
+  #   container_name: backend
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - DB_URL=jdbc:mysql://db:3306/${DB_NAME}?characterEncoding=UTF-8
+  #     - DB_USERNAME=${DB_USERNAME}
+  #     - DB_PASSWORD=${DB_PASSWORD}
+  #   restart: on-failure:5
+  # frontend:
+  #   build: ./frontend
+  #   container_name: frontend
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - backend
+
   backend:
-    build: ./backend
-    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend-faster
+    volumes:
+      - ./backend:/app                          # 소스 마운트
+      - gradle-cache:/root/.gradle              # Gradle 캐시 유지
     ports:
       - "8080:8080"
     depends_on:
@@ -21,11 +47,15 @@ services:
       - DB_URL=jdbc:mysql://db:3306/${DB_NAME}?characterEncoding=UTF-8
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-    restart: on-failure:5
   frontend:
-    build: ./frontend
-    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-faster
+    volumes:
+      - ./frontend:/app           # 소스 직접 마운트
     ports:
       - "5173:5173"
-    depends_on:
-      - backend
+    command: sh -c "npm install && npm run dev -- --host"
+volumes:
+  gradle-cache:
