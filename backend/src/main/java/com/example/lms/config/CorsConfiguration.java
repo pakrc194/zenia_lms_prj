@@ -1,4 +1,4 @@
-package com.example.lms.cors;
+package com.example.lms.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
