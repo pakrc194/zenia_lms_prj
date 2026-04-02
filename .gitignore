@@ -2,3 +2,4 @@
 .idea
 application-local.yml
 mysql_data/
+node_modules/

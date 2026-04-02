@@ -4,10 +4,12 @@ import Student from './components/Student'
 import Subject from './components/Subject'
 import Score from './components/Score'
 import Attendance from './components/Attendance'
+import Chat from './components/Chat'
 
 function App() {
-  const navs = ["Attendance", "Student", "Subject", "Score"]
+  const navs = ["Attendance", "Student", "Subject", "Score", "Chat"]
   const [selectedNav, setSelectedNav] = useState(navs[0])
+  const currentUser = "User"+(Math.random()*100).toFixed(0)
   return (
     <>
       <div>
@@ -17,6 +19,9 @@ function App() {
       {selectedNav==="Student" && <Student/>}
       {selectedNav==="Subject" && <Subject/>}
       {selectedNav==="Score" && <Score/>}
+      {selectedNav==="Chat" && <Chat
+            roomId="room1"
+            currentUser={currentUser}/>}
     </>
   )
 }

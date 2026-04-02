@@ -1,9 +1,12 @@
 package com.example.lms.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public interface AttendByMonthDto {
-    int getDay();
-    int getCount();
+@Data
+@AllArgsConstructor
+public class AttendByMonthDto {
+    int day;
+    Long count;
 }

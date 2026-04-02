@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import api from '../api/axiosInstance'
 
 
-export default function Calendar({setAttendances}) {
+export default function Calendar({setAttendances, selectedDate, setSelectedDate, attendMark, setAttendMarks}) {
     const [today, setToday] = useState(new Date())
     const [dayArr, setDayArr] = useState(["일","월","화","수","목","금","토"])
-    const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString("en-CA"))
+    const [selectedStyle, setSelectedStyle] = useState({year:new Date().getFullYear(), month:new Date().getMonth(),day:new Date().getDate()});
 
-    const [attendMark, setAttendMarks] = useState([])
 
     useEffect(()=>{
         const fetchAttendance = async () => {
@@ -70,10 +69,17 @@ export default function Calendar({setAttendances}) {
             </h2>
             <div className='cal_main'>
                 {dayArr.map((v,k)=>{
-                    return <div key={k} className='cal_day' 
+                    return <div key={k} className='cal_day'
+                                style={
+                                    (v==selectedStyle.day) &&
+                                    (today.getMonth()==selectedStyle.month) &&
+                                    (today.getFullYear()==selectedStyle.year) ? 
+                                    {backgroundColor:'#faa', color:'#333'}:{}
+                                } 
                                 onClick={()=>{
                                     const dateFormat = new Date(today.getFullYear(), today.getMonth(), v).toLocaleDateString("en-CA")
                                     // console.log(dateFormat)
+                                    setSelectedStyle({year: today.getFullYear(), month: today.getMonth(), day: v})
                                     return setSelectedDate(dateFormat)
                                 }
                             }>

@@ -7,21 +7,21 @@ SET NAMES 'utf8mb4';
 
 
 CREATE TABLE students (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
     grade INT,        -- 학년 (1~3)
     class_name VARCHAR(10) -- 반 (A, B, C)
 ) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE subjects (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
     teacher VARCHAR(50),
     credit INT  -- 학점
 ) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE scores (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
     subject_id INT,
     score INT,        -- 점수 (0~100)
@@ -31,7 +31,7 @@ CREATE TABLE scores (
 ) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE attendance (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
     attend_date DATE,
     status VARCHAR(10), -- 'present', 'absent', 'late'
