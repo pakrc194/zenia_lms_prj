@@ -16,4 +16,8 @@ public class ScoreService {
     public List<StudentScoreDto> findAll() {
         return scoreRepository.findAllScore().stream().map(StudentScoreDto::from).toList();
     }
+
+    public List<Score> findAllByStudentId(long studentId) {
+        return scoreRepository.findAllByStudentId(studentId);
+    }
 }

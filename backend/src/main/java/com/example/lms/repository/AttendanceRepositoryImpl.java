@@ -68,4 +68,15 @@ public class AttendanceRepositoryImpl implements AttendanceRepositoryCustom {
                 .where(attendance.status.isNull().or(attendance.status.isEmpty()))
                 .fetch();
     }
+
+    public List<Attendance> findAllByStudentIdWhereMonth(Long studentId, int month) {
+        return queryFactory
+                .select(attendance)
+                .from(attendance)
+                .join(attendance.student)
+                .on(attendance.student.id.eq(studentId))
+                .where(attendance.attendDate.month().eq(month))
+                .orderBy(attendance.attendDate.desc())
+                .fetch();
+    }
 }

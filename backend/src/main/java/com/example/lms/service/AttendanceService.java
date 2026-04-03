@@ -1,6 +1,7 @@
 package com.example.lms.service;
 
 import com.example.lms.dto.AttendByMonthDto;
+import com.example.lms.dto.AttendanceByMonthRequest;
 import com.example.lms.dto.AttendanceRequest;
 import com.example.lms.dto.StudentAttendanceDto;
 import com.example.lms.entity.Attendance;
@@ -56,5 +57,9 @@ public class AttendanceService {
         }
 
         return attendanceRepository.saveAll(attendList);
+    }
+
+    public List<Attendance> findAllByStudentIdWhereMonth(AttendanceByMonthRequest attendanceByMonthRequest) {
+        return attendanceRepositoryImpl.findAllByStudentIdWhereMonth(attendanceByMonthRequest.getStudentId(), attendanceByMonthRequest.getMonth());
     }
 }

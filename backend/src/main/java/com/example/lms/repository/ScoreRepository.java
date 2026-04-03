@@ -14,4 +14,6 @@ public interface ScoreRepository extends JpaRepository<Score, Integer> {
         select sc from Score sc join fetch sc.student join fetch sc.subject
     """)
     List<Score> findAllScore();
+
+    List<Score> findAllByStudentId(Long studentId);
 }

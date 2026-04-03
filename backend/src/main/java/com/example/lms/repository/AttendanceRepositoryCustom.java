@@ -11,4 +11,5 @@ public interface AttendanceRepositoryCustom {
     List<AttendByMonthDto> findAttendanceByMonth(LocalDate attendDate);
     List<StudentAttendanceDto> findAllByAttendDate(LocalDate attendDate);
     List<Long> findStudentIdsByStatusIsPresent(LocalDate attendDate);
+    List<Attendance> findAllByStudentIdWhereMonth(Long studentId, int month);
 }
