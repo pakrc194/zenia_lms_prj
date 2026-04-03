@@ -52,4 +52,20 @@ public class AttendanceRepositoryImpl implements AttendanceRepositoryCustom {
                 )
                 .fetch();
     }
+
+    @Override
+    public List<Long> findStudentIdsByStatusIsPresent(LocalDate attendDate) {
+        return queryFactory
+                .select(Projections.constructor(Long.class,
+                        student.id
+                ))
+                .from(student)
+                .leftJoin(attendance)
+                .on(
+                        attendance.student.id.eq(student.id),
+                        attendance.attendDate.eq(attendDate)  // 서브쿼리 조건을 ON절로 이동
+                )
+                .where(attendance.status.isNull().or(attendance.status.isEmpty()))
+                .fetch();
+    }
 }

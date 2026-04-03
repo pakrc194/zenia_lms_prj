@@ -1,0 +1,106 @@
+/* Attendance.css */
+
+.attendance-page {
+  /* #root의 중앙 정렬을 덮어씌움 */
+  text-align: left;
+  padding: 32px 40px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* root의 flex-column 공간 채우기 */
+}
+
+/* 좌우 배치 핵심 (Flexbox) */
+.attendance-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+/* 1024px 이하에서는 위아래로 쌓이게 (기존 미디어쿼리와 통일) */
+@media (max-width: 1024px) {
+  .attendance-layout {
+    flex-direction: column;
+  }
+}
+
+/* 왼쪽 캘린더, 오른쪽 리스트 영역 카드 스타일 */
+.calendar-section, 
+.list-section {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.list-section {
+  flex: 1.2; /* 리스트 쪽이 테이블이므로 조금 더 넓게 배정 */
+}
+
+/* 테이블 스타일 지정 */
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: var(--sans);
+}
+
+.attendance-table th, 
+.attendance-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 16px 8px;
+}
+
+.attendance-table th {
+  color: var(--text-h);
+  font-family: var(--heading);
+  font-weight: 500;
+  border-bottom: 2px solid var(--border);
+}
+
+.attendance-table td {
+  color: var(--text);
+  font-size: 15px;
+}
+
+/* 버튼 스타일 (Accent 변수 활용) */
+.attendance-table button {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.attendance-table button:hover:not(:disabled) {
+  background: var(--accent);
+  color: #fff;
+}
+
+.attendance-table button:disabled {
+  background: var(--social-bg);
+  color: var(--text);
+  border-color: var(--border);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.empty-info {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--text);
+  font-family: var(--heading);
+  background: var(--code-bg);
+  border-radius: 8px;
+}

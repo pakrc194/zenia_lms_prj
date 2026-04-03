@@ -34,4 +34,9 @@ public class AttendanceController {
 
         return attendanceService.saveAttendance(attendance);
     }
+
+    @PostMapping("/every")
+    List<Attendance> addAttendanceEvery(@RequestBody AttendanceRequest attendance) {
+        return attendanceService.saveAttendanceEvery(attendance);
+    }
 }

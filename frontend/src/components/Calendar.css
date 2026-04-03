@@ -1,16 +1,121 @@
+/* Calendar.css */
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.nav-btn {
+  background: var(--social-bg);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.nav-btn:hover {
+  background: var(--code-bg);
+  border-color: var(--text);
+}
+
+/* CSS Grid를 이용해 한 줄에 딱 7칸씩 들어가도록 설정 */
 .cal_main {
-    margin: 0 30px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 80%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px; 
+  width: 100%;
 }
 
 .cal_day {
-    width: 14%;
-    height: 2rem;
-    line-height: 2rem;
-    font-size: 1.5rem;
-    box-sizing: border-box;
-    border: 1px solid #333;
+  aspect-ratio: 1; /* 정사각형 비율 유지 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--text-h);
+  background: var(--bg);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 요일 표시 영역 (일~토) */
+.cal_day.weekday {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: default;
+  aspect-ratio: auto;
+  height: 30px;
+}
+
+/* 날짜가 없는 빈 칸 */
+.cal_day.empty {
+  border-color: transparent;
+  background: transparent;
+  cursor: default;
+}
+
+/* 날짜 호버 이벤트 (빈칸/요일 제외) */
+.cal_day:not(.weekday):not(.empty):hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  box-shadow: var(--shadow);
+}
+
+/* 선택된 날짜 (Accent Color 활용) */
+.cal_day.selected {
+  background: var(--accent);
+  color: #fff; /* 배경이 짙은 색이 되므로 글자는 흰색 */
+  border-color: var(--accent);
+  font-weight: 600;
+  transform: scale(1.05); /* 선택 시 살짝 커지는 효과 */
+  box-shadow: 0 4px 12px var(--accent-border);
+}
+
+/* 출석 배지 */
+.attend-mark {
+  font-size: 11px;
+  margin-top: 2px;
+  color: var(--text);
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+/* 선택된 날짜 하단 정보 */
+.selected-date-info {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--text);
+}
+
+.selected-date-info code {
+  margin-left: 8px;
 }

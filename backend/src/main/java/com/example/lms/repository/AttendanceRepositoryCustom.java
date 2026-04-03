@@ -10,4 +10,5 @@ import java.util.List;
 public interface AttendanceRepositoryCustom {
     List<AttendByMonthDto> findAttendanceByMonth(LocalDate attendDate);
     List<StudentAttendanceDto> findAllByAttendDate(LocalDate attendDate);
+    List<Long> findStudentIdsByStatusIsPresent(LocalDate attendDate);
 }
