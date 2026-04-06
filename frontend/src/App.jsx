@@ -7,10 +7,16 @@ import Attendance from './components/Attendance'
 import Chat from './components/Chat'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import StudentDetail from './components/StudentDetail'
+import Season from './components/Season'
+import SeasonInsert from './components/SeasonInsert'
+import Course from './components/Course'
+import CourseInsert from './components/CourseInsert'
 
 
 function App() {
-  const navs = [{title:"Attendance", path:"/attend"},
+  const navs = [
+    {title:"Season", path:"/season/1"},
+    {title:"Attendance", path:"/attend"},
     {title:"Student", path:"/student"},
     {title:"Subject", path:"/subject"},
     {title:"Score", path:"/score"},
@@ -25,6 +31,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<div>lms</div>}/>
+          <Route path="season/:pageNo" element={<Season/>}/>
+          <Route path="season/insert" element={<SeasonInsert/>}/>
+          
+          <Route path="course/:seasonId" element={<Course/>}/>
+          <Route path="course/:seasonId/insert" element={<CourseInsert/>}/>
+          
+
           <Route path="attend" element={<Attendance/>}/>
           <Route path="student" element={<Student/>}/>
           <Route path="student/:id" element={<StudentDetail/>}/>

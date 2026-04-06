@@ -9,6 +9,8 @@ export default function StudentDetail() {
     const [scores, setScores] = useState({})
     const [student, setStudent] = useState({})
 
+    const SUBJECT_ORDER = ["국어", "영어", "수학", "과학", "역사", "총점"]
+
     useEffect(()=>{
         const fetchAttends = async () => {
             const {data} = await api.post("/student/attendance", {
@@ -26,7 +28,12 @@ export default function StudentDetail() {
         const fetchScores = async () => {
             const {data} = await api.get(`/student/score/${id}`)
             console.log("score ",data)
-
+            let filtered = {}
+            data.map(v=>{
+                filtered = {...filtered, [v.subject.name]:[v.score]}
+            })
+            console.log(`filtered`, data);
+            setScores(filtered);
         }
         fetchScores()
 
@@ -64,6 +71,11 @@ export default function StudentDetail() {
             </div>
             <div>
                 <h2>Score</h2>
+                {SUBJECT_ORDER.map((v, k)=>{
+                    if(scores[v]!=null && scores[v]!="") {
+                        return <div key={k}>{v} : {scores[v]}</div>
+                    }
+                })}
             </div>
         </>
     )

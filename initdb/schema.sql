@@ -38,9 +38,45 @@ CREATE TABLE attendance (
     FOREIGN KEY (student_id) REFERENCES students(id)
 ) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE season (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30),
+    start_date DATE,
+    end_date DATE
+) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE course (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    subject_id INT,
+    season_id INT,
+    location VARCHAR(10),
+    capacity INT,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id),
+    FOREIGN KEY (season_id) REFERENCES season(id)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE course_register (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT,
+    course_id INT,
+    create_at DATETIME,
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (course_id) REFERENCES course(id)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 -- ================================
 -- 데이터
 -- ================================
+
+INSERT INTO season (id, name, start_date, end_date) VALUES
+(1, '2025년도 1회차', '2025-01-01', '2025-03-31'),
+(2, '2025년도 2회차', '2025-03-01', '2025-06-30'),
+(3, '2025년도 3회차', '2025-06-01', '2025-09-30'),
+(4, '2025년도 4회차', '2025-09-01', '2025-12-31'),
+(5, '2026년도 1회차', '2026-01-01', '2026-03-31'),
+(6, '2026년도 2회차', '2026-04-01', '2026-06-30');
+
 
 INSERT INTO students (id, name, grade, class_name) VALUES
 (1,  '김민준', 1, 'A'),
