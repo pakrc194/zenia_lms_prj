@@ -55,12 +55,15 @@ export default function Course() {
                 }
             })
             console.log("fn_status",data)
-            setRegisterList(prev=>(
-                data
-            ))
-
-
-
+            setRegisterList(prev=>{
+                if(prev[course.id]) {
+                    return [...prev, {[course.id]:[data]}]
+                } else {
+                    return prev.push()
+                }
+                
+            })
+            
             setIsStatusOpen(prev=>({...prev, [course.id]:true}))
         } else {
             setIsStatusOpen(prev=>({...prev, [course.id]:false}))
@@ -77,7 +80,7 @@ export default function Course() {
                     <div key={v.id}>
                         {v.subject.name} | {v.subject.teacher} | {v.location} | (0/{v.capacity}) |<button onClick={()=>fn_regist(v)}>신청</button> | <button onClick={()=>fn_status(v)}>현황</button>
                         {(isStatusOpen[v.id]!=null || isStatusOpen[v.id]==true) && <div>
-                            {registerList.map((v,k)=><div v={k}>{v.student.name}|{v.createAt}</div>)}
+                            {registerList[v.id] && registerList[v.id].map((v,k)=><div v={k}>{v.student.name}|{v.createAt}</div>)}
                         </div>}
                     </div>
                 ))}
