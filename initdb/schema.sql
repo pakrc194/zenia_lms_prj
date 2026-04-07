@@ -8,6 +8,7 @@ SET NAMES 'utf8mb4';
 
 CREATE TABLE students (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    sid VARCHAR(10),
     name VARCHAR(50),
     grade INT,        -- 학년 (1~3)
     class_name VARCHAR(10) -- 반 (A, B, C)
@@ -78,17 +79,17 @@ INSERT INTO season (id, name, start_date, end_date) VALUES
 (6, '2026년도 2회차', '2026-04-01', '2026-06-30');
 
 
-INSERT INTO students (id, name, grade, class_name) VALUES
-(1,  '김민준', 1, 'A'),
-(2,  '이서연', 1, 'A'),
-(3,  '박지호', 1, 'B'),
-(4,  '최유나', 2, 'A'),
-(5,  '정현우', 2, 'B'),
-(6,  '강서윤', 2, 'B'),
-(7,  '윤도현', 3, 'A'),
-(8,  '임수아', 3, 'B'),
-(9,  '한재원', 3, 'C'),
-(10, '오지은', 3, 'C');
+INSERT INTO students (id, sid, name, grade, class_name) VALUES
+(1,  'L0001',   '김민준', 1, 'A'),
+(2,  'L0002',   '이서연', 1, 'A'),
+(3,  'L0003',   '박지호', 1, 'B'),
+(4,  'L0004',   '최유나', 2, 'A'),
+(5,  'L0005',   '정현우', 2, 'B'),
+(6,  'L0006',   '강서윤', 2, 'B'),
+(7,  'L0007',   '윤도현', 3, 'A'),
+(8,  'L0008',   '임수아', 3, 'B'),
+(9,  'L0009',   '한재원', 3, 'C'),
+(10, 'L0010',   '오지은', 3, 'C');
 
 INSERT INTO subjects VALUES
 (1, '수학',   '김선생', 3),

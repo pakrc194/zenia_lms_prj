@@ -27,6 +27,12 @@ public class CourseRegisterService {
          if(course == null) {
              return null;
          }
+         List<CourseRegister> existList = courseRegisterRepository.findByCourse_IdAndStudent_Id(
+                 courseRegisterRequest.getCourseId(),  courseRegisterRequest.getStudentId());
+         if(!existList.isEmpty()) {
+             return null;
+         }
+
 
          if(course.getCapacity() > courseRegisterRepository.countByCourse_Id(courseRegisterRequest.getCourseId())) {
              CourseRegister courseRegister = new CourseRegister();
@@ -49,4 +55,9 @@ public class CourseRegisterService {
     public List<CourseRegister> findByCourseId(int courseId) {
         return courseRegisterRepository.findByCourse_Id(courseId);
     }
+
+    public Long countByCourseId(int courseId) {
+        return courseRegisterRepository.countByCourse_Id(courseId);
+    }
+
 }

@@ -2,8 +2,10 @@ package com.example.lms.service;
 
 
 import com.example.lms.dto.CourseRequest;
+import com.example.lms.dto.CourseStatusResponse;
 import com.example.lms.entity.Course;
 import com.example.lms.repository.CourseRepository;
+import com.example.lms.repository.CourseRepositoryImpl;
 import com.example.lms.repository.SeasonRepository;
 import com.example.lms.repository.SubjectRepository;
 import jakarta.annotation.Resource;
@@ -19,7 +21,8 @@ public class CourseService {
     private SeasonRepository seasonRepository;
     @Resource
     private SubjectRepository subjectRepository;
-
+    @Resource
+    private CourseRepositoryImpl courseRepositoryImpl;
 
     public Course save(CourseRequest course) {
         Course newCourse = new Course();
@@ -33,5 +36,9 @@ public class CourseService {
 
     public List<Course> findBySeasonId(int seasonId) {
         return courseRepository.findBySeasonId(seasonId);
+    }
+
+    public List<CourseStatusResponse> findLeftJoinRegisterBySeasonId(int seasonId) {
+        return courseRepositoryImpl.findLeftJoinRegisterBySeasonId(seasonId);
     }
 }

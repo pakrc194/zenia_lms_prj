@@ -22,4 +22,5 @@ public class CourseRegisterController {
     public CourseRegister deleteCourse(@RequestBody CourseRegisterRequest courseRegisterRequest) {
         return courseRegisterService.delete(courseRegisterRequest);
     }
+
 }

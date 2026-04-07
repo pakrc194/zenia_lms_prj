@@ -11,4 +11,6 @@ public interface CourseRegisterRepository extends JpaRepository<CourseRegister, 
     long countByCourse_Id(int courseId);
 
     List<CourseRegister> findByCourse_Id(int courseId);
+
+    List<CourseRegister> findByCourse_IdAndStudent_Id(int courseId, Long studentId);
 }

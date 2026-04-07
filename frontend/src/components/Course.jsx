@@ -33,10 +33,10 @@ export default function Course() {
         fetchCourses()
         
 
-    },[season])
+    },[season, registerList])
 
     const fn_regist = async (course) => {
-        const studentId = 1;
+        const studentId = Math.ceil(Math.random()*10);
 
         const bodyData = {
             studentId: studentId,
@@ -45,6 +45,13 @@ export default function Course() {
 
         const {data} = await api.post("/courseRegister", bodyData)
         console.log("fn_regist",data)
+        if(data==null || data=="") {
+            alert("신청 실패")
+        } else {
+            alert("신청 성공")
+            //navigate(0)
+        }
+        
     }
 
     const fn_status = async (course) => {
@@ -55,13 +62,15 @@ export default function Course() {
                 }
             })
             console.log("fn_status",data)
+
             setRegisterList(prev=>{
+                console.log("prev",prev)
                 if(prev[course.id]) {
-                    return [...prev, {[course.id]:[data]}]
+                    prev[course.id] = data
+                    return prev
                 } else {
-                    return prev.push()
+                    return {...prev, [course.id]:data}
                 }
-                
             })
             
             setIsStatusOpen(prev=>({...prev, [course.id]:true}))
@@ -78,15 +87,16 @@ export default function Course() {
             <div>
                 {courses.map(v=>(
                     <div key={v.id}>
-                        {v.subject.name} | {v.subject.teacher} | {v.location} | (0/{v.capacity}) |<button onClick={()=>fn_regist(v)}>신청</button> | <button onClick={()=>fn_status(v)}>현황</button>
-                        {(isStatusOpen[v.id]!=null || isStatusOpen[v.id]==true) && <div>
-                            {registerList[v.id] && registerList[v.id].map((v,k)=><div v={k}>{v.student.name}|{v.createAt}</div>)}
+                        {v.subject} | {v.teacher} | {v.location} | ({v.status}/{v.capacity}) |<button onClick={()=>fn_regist(v)}>신청</button> | <button onClick={()=>fn_status(v)}>현황</button>
+                        {(isStatusOpen[v.id]==true) && <div>
+                            {registerList[v.id] && registerList[v.id].map((v,k)=><div key={k}>{v.student.sid} | {v.student.name} | {v.createAt}</div>)}
                         </div>}
                     </div>
                 ))}
             </div>
             <div>
                 <button onClick={()=>navigate(`/course/${seasonId}/insert`)}>등록</button>
+                <button onClick={()=>navigate(`/season/1`)}>목록</button>
             </div>
         </>
         

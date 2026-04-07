@@ -12,6 +12,7 @@ public class Student {
     private Long id;
     private String name;
     private int grade;
+    private String sid;
 
     @Column(name = "class_name")
     private String className;

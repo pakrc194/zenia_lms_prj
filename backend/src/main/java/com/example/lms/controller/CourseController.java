@@ -1,6 +1,7 @@
 package com.example.lms.controller;
 
 import com.example.lms.dto.CourseRequest;
+import com.example.lms.dto.CourseStatusResponse;
 import com.example.lms.entity.Course;
 import com.example.lms.entity.CourseRegister;
 import com.example.lms.service.CourseRegisterService;
@@ -21,8 +22,9 @@ public class CourseController {
     private CourseRegisterService courseRegisterService;
 
     @GetMapping("/{seasonId}")
-    public List<Course> findBySeasonId(@PathVariable int seasonId) {
-        return courseService.findBySeasonId(seasonId);
+    public List<CourseStatusResponse> findBySeasonId(@PathVariable int seasonId) {
+        //return courseService.findBySeasonId(seasonId);
+        return courseService.findLeftJoinRegisterBySeasonId(seasonId);
     }
 
     @PostMapping
